@@ -24,12 +24,14 @@ export default function IndexPage() {
   };
 
   const handleDeletePokemon = (index: number) => {
+    const adjustedIndex = (currentPage - 1) * cardsPerPage + index;
     setPokemonNames((prevNames) => {
       const updatedNames = [...prevNames];
-      updatedNames.splice(index, 1);
+      updatedNames.splice(adjustedIndex, 1);
       return updatedNames;
     });
   };
+  
 
   const handleEditPokemon = (index: number) => {
     setEditingPokemonIndex(index);

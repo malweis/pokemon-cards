@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { BellRing, Check } from "lucide-react"
 import Image from "next/image"
@@ -37,6 +37,7 @@ interface CardComponentProps extends CardProps {
   export function CardComponent({ className, pokemonName,editable, onDelete, onSave, onEdit  }: CardComponentProps) {
     const [imageUrl, setImageUrl] = useState<string>('');
     const [abilities, setAbilities] = useState<Ability[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
     console.log(pokemonName)
     const [editedPokemonName, setEditedPokemonName] = useState(pokemonName);
     console.log(editedPokemonName)
@@ -50,6 +51,17 @@ interface CardComponentProps extends CardProps {
       onSave(editedPokemonName);
     };
     
+  const handleInputKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSaveClick();
+    }
+  };
+    
+  useEffect(() => {
+    if (editable && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editable]);
   
     useEffect(() => {
       setEditedPokemonName(pokemonName); // Set the initial value of editedPokemonName
@@ -103,7 +115,9 @@ interface CardComponentProps extends CardProps {
             type="text"
             value={editedPokemonName}
             onChange={handleInputChange}
+            onKeyDown={handleInputKeyPress}
             className="text-xl font-medium"
+            ref={inputRef}
           />
         ) : (
           <CardTitle className="place-self-center">{pokemonName}</CardTitle>

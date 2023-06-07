@@ -15,11 +15,19 @@ export default function IndexPage() {
     inputField.value = '';
   };
 
+  const handleDeletePokemon = (index: number) => {
+    setPokemonNames((prevNames) => {
+      const updatedNames = [...prevNames];
+      updatedNames.splice(index, 1);
+      return updatedNames;
+    });
+  };
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px]  items-start gap-2">
         {pokemonNames.map((pokemonName, index) => (
-          <CardComponent key={index} pokemonName={pokemonName} />
+          <CardComponent key={index} pokemonName={pokemonName}  onDelete={() => handleDeletePokemon(index)}/>
         ))}
       </div>
       <div className="flex gap-4 items-center">

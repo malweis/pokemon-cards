@@ -35,6 +35,8 @@ type CardProps = React.ComponentProps<typeof Card>
 
 interface CardComponentProps extends CardProps {
     pokemonName: string;
+    onDelete: () => void;
+
   }
   
   interface Ability {
@@ -42,7 +44,7 @@ interface CardComponentProps extends CardProps {
     description: string;
   }
 
-  export function CardComponent({ className, pokemonName }: CardComponentProps) {
+  export function CardComponent({ className, pokemonName, onDelete  }: CardComponentProps) {
     const [imageUrl, setImageUrl] = useState<string>('');
     const [abilities, setAbilities] = useState<Ability[]>([]);
   
@@ -126,7 +128,7 @@ interface CardComponentProps extends CardProps {
         </div>
       </CardContent>
       <CardFooter className='flex gap-4'>
-        <Button className="w-3/4">
+      <Button className="w-3/4" onClick={onDelete}>
           <Check className="mr-2 h-4 w-4" /> Borrar
         </Button>
         <Button className="w-3/4">

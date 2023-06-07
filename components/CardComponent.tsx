@@ -16,26 +16,16 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-]
+
 
 type CardProps = React.ComponentProps<typeof Card>
 
 interface CardComponentProps extends CardProps {
-    pokemonName: string;
-    onDelete: () => void;
+  pokemonName: string;
+  editable: boolean;
+  onEdit: () => void;
+  onSave: (newPokemonName: string) => void;
+  onDelete: () => void;
 
   }
   
@@ -44,9 +34,20 @@ interface CardComponentProps extends CardProps {
     description: string;
   }
 
-  export function CardComponent({ className, pokemonName, onDelete  }: CardComponentProps) {
+  export function CardComponent({ className, pokemonName,editable, onDelete, onSave, onEdit  }: CardComponentProps) {
     const [imageUrl, setImageUrl] = useState<string>('');
     const [abilities, setAbilities] = useState<Ability[]>([]);
+
+    const [editedPokemonName, setEditedPokemonName] = useState(pokemonName);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedPokemonName(event.target.value);
+    };
+  
+    const handleSaveClick = () => {
+      onSave(editedPokemonName);
+    };
+    
   
     useEffect(() => {
         const fetchPokemonData = async () => {
@@ -92,8 +93,17 @@ interface CardComponentProps extends CardProps {
     
   return (
     <Card className={cn("w-[380px]", className)} >
-      <CardHeader>
-        <CardTitle className='place-self-center'>{pokemonName}</CardTitle>
+       <CardHeader>
+        {editable ? (
+          <input
+            type="text"
+            value={editedPokemonName}
+            onChange={handleInputChange}
+            className="text-xl font-medium"
+          />
+        ) : (
+          <CardTitle className="place-self-center">{pokemonName}</CardTitle>
+        )}
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className=" flex items-center place-self-center justify-center space-x-4 w-3/6 rounded-md border p-4">
@@ -127,13 +137,24 @@ interface CardComponentProps extends CardProps {
           ))}
         </div>
       </CardContent>
-      <CardFooter className='flex gap-4'>
-      <Button className="w-3/4" onClick={onDelete}>
-          <Check className="mr-2 h-4 w-4" /> Borrar
-        </Button>
-        <Button className="w-3/4">
-          <Check className="mr-2 h-4 w-4" /> Editar
-        </Button>
+      <CardFooter className="flex gap-4">
+        {editable ? (
+          <>
+            <Button className="w-3/4" onClick={handleSaveClick}>
+              <Check className="mr-2 h-4 w-4" /> Guardar
+            </Button>
+         
+          </>
+        ) : (
+          <>
+          <Button className="w-3/4" onClick={onEdit}>
+            <Check className="mr-2 h-4 w-4" /> Editar
+          </Button>
+          <Button className="w-3/4" onClick={onDelete}>
+              <Check className="mr-2 h-4 w-4" /> Borrar
+            </Button>
+          </>
+        )}
       </CardFooter>
     </Card>
   )

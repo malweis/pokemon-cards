@@ -4,6 +4,10 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ['raw.githubusercontent.com'],
+  },
 }
+
 
 export default nextConfig

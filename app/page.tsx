@@ -17,6 +17,11 @@ export default function IndexPage() {
     setPokemonNames((prevNames) => [...prevNames, pokemonName]);
     inputField.value = '';
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleAddPokemon();
+    }
+  };
 
   const handleDeletePokemon = (index: number) => {
     setPokemonNames((prevNames) => {
@@ -88,6 +93,7 @@ export default function IndexPage() {
           type="text"
           placeholder="Ingresa el nombre del pokemon (en minúsculas)"
           id="btn-agregar"
+          onKeyDown={handleKeyDown}
         />
       </div>
     </section>

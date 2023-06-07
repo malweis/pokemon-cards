@@ -1,5 +1,5 @@
 import Link from "next/link"
-
+import { Boton } from "@/components/Boton"
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import { CardComponent
@@ -11,14 +11,8 @@ export default function IndexPage() {
       <CardComponent pokemonName="charmander"/>
       </div>
       <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
+      <Boton text="Agregar Pokemon"  className={buttonVariants()}  />
+       
         <Link
           target="_blank"
           rel="noreferrer"

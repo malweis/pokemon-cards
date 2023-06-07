@@ -46,6 +46,13 @@ export default function IndexPage() {
     });
     setEditingPokemonIndex(-1);
   };
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages);
+  };
   
   // Calculate the index of the last card on the current page
   const lastIndex = currentPage * cardsPerPage;
@@ -78,6 +85,7 @@ export default function IndexPage() {
         ))}
       </div>
       <div className="w-full flex gap-3 justify-center">
+      <Boton text="<<" onClick={handleFirstPage} className={buttonVariants()} />
         <Boton text="<" onClick={() => handlePageChange(currentPage - 1)} className={buttonVariants()} />
         {Array.from({ length: totalPages }, (_, index) => (
           <Boton
@@ -88,6 +96,7 @@ export default function IndexPage() {
           />
         ))}
         <Boton text=">" onClick={() => handlePageChange(currentPage + 1)} className={buttonVariants()} />
+        <Boton text=">>" onClick={handleLastPage} className={buttonVariants()} />
       </div>
       <div className="flex gap-4 items-center">
         <Boton text="Agregar Pokemon" onClick={handleAddPokemon} className={buttonVariants()} />

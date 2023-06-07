@@ -1,27 +1,35 @@
-import Link from "next/link"
-import { Boton } from "@/components/Boton"
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
-import { CardComponent
- } from "@/components/CardComponent"
+"use client"
+import { useState } from 'react';
+import { Boton } from '@/components/Boton';
+import { InputField } from '@/components/InputField';
+import { CardComponent } from '@/components/CardComponent';
+import { buttonVariants } from '@/components/ui/button';
+
 export default function IndexPage() {
+  const [pokemonNames, setPokemonNames] = useState<string[]>([]);
+
+  const handleAddPokemon = () => {
+    const inputField = document.getElementById('btn-agregar') as HTMLInputElement;
+    const pokemonName = inputField.value.toLowerCase();
+    setPokemonNames((prevNames) => [...prevNames, pokemonName]);
+    inputField.value = '';
+  };
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-      <CardComponent pokemonName="charmander"/>
+      <div className="flex max-w-[980px]  items-start gap-2">
+        {pokemonNames.map((pokemonName, index) => (
+          <CardComponent key={index} pokemonName={pokemonName} />
+        ))}
       </div>
-      <div className="flex gap-4">
-      <Boton text="Agregar Pokemon"  className={buttonVariants()}  />
-       
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
+      <div className="flex gap-4 items-center">
+        <Boton text="Agregar Pokemon" onClick={handleAddPokemon} className={buttonVariants()} />
+        <InputField
+          type="text"
+          placeholder="Ingresa el nombre del pokemon (en minúsculas)"
+          id="btn-agregar"
+        />
       </div>
     </section>
-  )
+  );
 }

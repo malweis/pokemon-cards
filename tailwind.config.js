@@ -73,4 +73,7 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  "tailwindCSS.includeLanguages": { 
+    "plaintext": "javascript" 
+  }
 }

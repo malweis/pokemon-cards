@@ -31,14 +31,15 @@ export default function IndexPage() {
   };
 
   const handleSavePokemon = (index: number, newPokemonName: string) => {
+    const adjustedIndex = (currentPage - 1) * cardsPerPage + index;
     setPokemonNames((prevNames) => {
       const updatedNames = [...prevNames];
-      updatedNames[index] = newPokemonName;
+      updatedNames[adjustedIndex] = newPokemonName;
       return updatedNames;
     });
     setEditingPokemonIndex(-1);
   };
-
+  
   // Calculate the index of the last card on the current page
   const lastIndex = currentPage * cardsPerPage;
 

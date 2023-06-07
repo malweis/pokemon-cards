@@ -37,11 +37,13 @@ interface CardComponentProps extends CardProps {
   export function CardComponent({ className, pokemonName,editable, onDelete, onSave, onEdit  }: CardComponentProps) {
     const [imageUrl, setImageUrl] = useState<string>('');
     const [abilities, setAbilities] = useState<Ability[]>([]);
-
+    console.log(pokemonName)
     const [editedPokemonName, setEditedPokemonName] = useState(pokemonName);
+    console.log(editedPokemonName)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setEditedPokemonName(event.target.value);
+      
     };
   
     const handleSaveClick = () => {
@@ -50,6 +52,8 @@ interface CardComponentProps extends CardProps {
     
   
     useEffect(() => {
+      setEditedPokemonName(pokemonName); // Set the initial value of editedPokemonName
+
         const fetchPokemonData = async () => {
           try {
             const response = await axios.get(

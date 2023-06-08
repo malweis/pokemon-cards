@@ -45,7 +45,14 @@
   }
 
   .dark {
-    --background: 224 71% 4%;
+
+    --main-bg:224 71% 4%;
+    --texto:0 0% 100%;
+    --btn-primary:235 62% 52%;
+    --btn-secondary:0 0% 100%;
+    --accent:187 72% 32%;
+    
+    --background: var(--main-bg);
     --foreground: 213 31% 91%;
 
     --muted: 223 47% 11%;
@@ -58,13 +65,13 @@
     --popover-foreground: 215 20.2% 65.1%;
 
     --border: 216 34% 17%;
-    --input: 216 34% 17%;
+    --input: var(--btn-primary);
 
     --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
+    --card-foreground: var(--texto);
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --primary: var(--btn-primary);
+    --primary-foreground: var(--texto);
 
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 210 40% 98%;

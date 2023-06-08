@@ -18,9 +18,7 @@ export default function IndexPage() {
     inputField.value = '';
   };
 
-  const capitalizeFirstLetter = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
+
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -77,18 +75,26 @@ export default function IndexPage() {
 
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex w-full justify-evenly items-start gap-2">
-        {currentCards.map((pokemonName, index) => (
-          <CardComponent
-            key={index}
-            pokemonName={pokemonName}
-            editable={index === editingPokemonIndex}
-            onDelete={() => handleDeletePokemon(index)}
-            onEdit={() => handleEditPokemon(index)}
-            onSave={(newPokemonName) => handleSavePokemon(index, newPokemonName)}
-          />
-        ))}
-      </div>
+     <div className="flex w-full justify-evenly items-start gap-2">
+      {currentCards.map((pokemonName, index) => {
+        try {
+          return (
+            <CardComponent
+              key={index}
+              pokemonName={pokemonName}
+              editable={index === editingPokemonIndex}
+              onDelete={() => handleDeletePokemon(index)}
+              onEdit={() => handleEditPokemon(index)}
+              onSave={(newPokemonName) => handleSavePokemon(index, newPokemonName)}
+              className='shadow-lg'
+            />
+          );
+        } catch (error) {
+          console.error('Error:', error);
+          return null;
+        }
+      })}
+    </div>
       <div className="w-full flex gap-3 justify-center">
       <Boton text="<<" onClick={handleFirstPage} className={buttonVariants()} />
         <Boton text="<" onClick={() => handlePageChange(currentPage - 1)} className={buttonVariants()} />

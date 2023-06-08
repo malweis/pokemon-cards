@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    --main-bg:266 39% 93%;
+    --texto:263 40% 4%;
+    --btn-primary:264 39% 47%;
+    --btn-secondary:270 33% 99%;
+    --accent:264 39% 42%;
+
+
+    --background: var(--main-bg);
+    --foreground: 264 39% 47%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -14,12 +22,12 @@
     --popover-foreground: 222.2 47.4% 11.2%;
 
     --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --input: var(--btn-primary);
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card:var(--btn-secondary);
+    --card-foreground: var(--texto);
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: var(--btn-primary);
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;

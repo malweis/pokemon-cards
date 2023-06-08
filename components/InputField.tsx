@@ -11,7 +11,7 @@ interface InputProps {
 
 export function InputField({ type, placeholder, id, onKeyDown }: InputProps) {
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
+    <div className="grid w-full max-w-sm items-center gap-1.5 text-card-foreground">
       <Input type={type} id={id} placeholder={placeholder} onKeyDown={onKeyDown} />
     </div>
   );

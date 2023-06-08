@@ -155,7 +155,7 @@ interface CardComponentProps extends CardProps {
                 <p className="text-sm font-medium leading-none">
                 {capitalizeFirstLetter(ability.title)}
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm dark:text-primary-foreground">
                 {capitalizeFirstLetter(ability.description)}
                 </p>
               </div>

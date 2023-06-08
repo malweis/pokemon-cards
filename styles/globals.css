@@ -48,8 +48,8 @@
 
     --main-bg:224 71% 4%;
     --texto:0 0% 100%;
-    --btn-primary:235 62% 52%;
-    --btn-secondary:0 0% 100%;
+    --btn-primary:204 88% 53%;
+    --btn-secondary:220 12% 10%;
     --accent:187 72% 32%;
     
     --background: var(--main-bg);
@@ -64,10 +64,10 @@
     --popover: 224 71% 4%;
     --popover-foreground: 215 20.2% 65.1%;
 
-    --border: 216 34% 17%;
+    --border: 216 34% 60%;
     --input: var(--btn-primary);
 
-    --card: 224 71% 4%;
+    --card: var(--btn-secondary);
     --card-foreground: var(--texto);
 
     --primary: var(--btn-primary);

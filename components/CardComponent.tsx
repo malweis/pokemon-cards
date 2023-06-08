@@ -163,7 +163,7 @@ interface CardComponentProps extends CardProps {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="flex gap-4">
+      <CardFooter className="flex justify-center gap-4">
         {editable ? (
           <>
             <Button className="w-3/4" onClick={handleSaveClick}>

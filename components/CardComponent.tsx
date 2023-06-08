@@ -116,7 +116,7 @@ interface CardComponentProps extends CardProps {
 
     
   return (
-    <Card className={cn("w-[380px]", className)} >
+    <Card className={cn("sm:w-[380px] w-full", className)} >
        <CardHeader>
         {editable ? (
           <input

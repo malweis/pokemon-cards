@@ -17,6 +17,11 @@ export default function IndexPage() {
     setPokemonNames((prevNames) => [...prevNames, pokemonName]);
     inputField.value = '';
   };
+
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleAddPokemon();

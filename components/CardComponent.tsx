@@ -19,6 +19,9 @@ import { Switch } from "@/components/ui/switch"
 
 
 type CardProps = React.ComponentProps<typeof Card>
+const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
 
 interface CardComponentProps extends CardProps {
   pokemonName: string;
@@ -39,9 +42,10 @@ interface CardComponentProps extends CardProps {
     const [abilities, setAbilities] = useState<Ability[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
     console.log(pokemonName)
-    const [editedPokemonName, setEditedPokemonName] = useState(pokemonName);
+    const [editedPokemonName, setEditedPokemonName] = useState(capitalizeFirstLetter(pokemonName));
     console.log(editedPokemonName)
 
+   
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setEditedPokemonName(event.target.value);
       
@@ -64,12 +68,12 @@ interface CardComponentProps extends CardProps {
   }, [editable]);
   
     useEffect(() => {
-      setEditedPokemonName(pokemonName); // Set the initial value of editedPokemonName
-
+      setEditedPokemonName(capitalizeFirstLetter(pokemonName)); // Set the initial value of editedPokemonName
+      
         const fetchPokemonData = async () => {
           try {
             const response = await axios.get(
-              `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+              `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
             );
             const pokemonData = response.data;
     
@@ -98,7 +102,11 @@ interface CardComponentProps extends CardProps {
     
             setImageUrl(imageUrl);
             setAbilities(abilities);
-          } catch (error) {
+          } catch (error: any) {
+            if (error.response && error.response.status === 404) {
+              console.log('No se encontró el Pokémon');
+            }
+        
             console.error('Error fetching Pokemon data:', error);
           }
         };
@@ -113,14 +121,14 @@ interface CardComponentProps extends CardProps {
         {editable ? (
           <input
             type="text"
-            value={editedPokemonName}
+            value={capitalizeFirstLetter(editedPokemonName)}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyPress}
             className="text-xl font-medium"
             ref={inputRef}
           />
         ) : (
-          <CardTitle className="place-self-center">{pokemonName}</CardTitle>
+          <CardTitle className="place-self-center">{capitalizeFirstLetter(pokemonName)}</CardTitle>
         )}
       </CardHeader>
       <CardContent className="grid gap-4">
@@ -145,10 +153,10 @@ interface CardComponentProps extends CardProps {
               <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
               <div className="space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {ability.title}
+                {capitalizeFirstLetter(ability.title)}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {ability.description}
+                {capitalizeFirstLetter(ability.description)}
                 </p>
               </div>
             </div>

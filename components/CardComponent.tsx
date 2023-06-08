@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+import { AlertDialogo } from './AlertDialogo';
 
 
 
@@ -176,9 +177,7 @@ interface CardComponentProps extends CardProps {
           <Button className="w-3/4" onClick={onEdit}>
             <Check className="mr-2 h-4 w-4" /> Editar
           </Button>
-          <Button className="w-3/4" onClick={onDelete}>
-              <Check className="mr-2 h-4 w-4" /> Borrar
-            </Button>
+          <AlertDialogo onDelete={onDelete} />
           </>
         )}
       </CardFooter>
